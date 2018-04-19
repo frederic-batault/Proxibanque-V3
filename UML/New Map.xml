@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<map uid="Uf6mxV" name="New Map" ownerName="SBZ007" cleanName="New-Map-1" groupsLabel="Groups" listsLabel="Lists" layersLabel="Layers">
+  <card uid="RJLysh" id="1" role="GroupHeader" index="0" title="Fonctionnalités Conseiller" />
+  <card uid="YBglFI" id="3" role="ListHeader" parentCardId="1" index="0" title="Sessions Conseiller" />
+  <card uid="lzd7bw" id="5" role="ListHeader" parentCardId="1" index="1" title="Gestion Clients" />
+  <card uid="92d6PT" id="6" role="LayerHeader" index="0" title="Release 1 : mvp" />
+  <card uid="bI0u_i" id="8" role="ListItem" parentCardId="3" otherParentCardId="6" index="0" title="Authentification/Deconexion" color="yellow" />
+  <card uid="uorhIB" id="10" role="ListHeader" parentCardId="1" index="2" title="Gestion Comptes" />
+  <card uid="y-w2OU" id="12" role="ListItem" parentCardId="5" otherParentCardId="6" index="1" title="Création client" color="yellow" />
+  <card uid="TDgriz" id="15" role="ListItem" parentCardId="5" otherParentCardId="6" index="2" title="Supprimer client" color="yellow" />
+  <card uid="_YdJpG" id="20" role="ListHeader" parentCardId="1" index="3" title="Transactions" />
+  <card uid="RX53wW" id="21" role="ListItem" parentCardId="20" otherParentCardId="6" index="0" title="Crédit / débit" color="yellow" />
+  <card uid="sEB93r" id="22" role="ListItem" parentCardId="20" otherParentCardId="6" index="1" title="Effectuer un virement" color="yellow" status="aggregated" />
+  <card uid="qe2NId" id="23" role="ListItem" parentCardId="10" otherParentCardId="6" index="0" title="Créer compte" color="yellow" />
+  <card uid="ahovmm" id="25" role="ListItem" parentCardId="5" otherParentCardId="6" index="0" title="Afficher liste clients" color="yellow" />
+  <card uid="NWzBum" id="27" role="GroupHeader" index="1" isVirtual="true" />
+  <card uid="eX_XBX" id="28" role="ListHeader" parentCardId="27" index="0" isVirtual="true" />
+  <card uid="IHNMJj" id="33" role="LayerHeader" index="1" title="Release 2" />
+  <card uid="sVM1be" id="34" role="ListItem" parentCardId="10" otherParentCardId="33" index="0" title="Modifier Compte" color="green" />
+  <card uid="JxpaJi" id="35" role="ListItem" parentCardId="10" otherParentCardId="43" index="0" title="Supprimer Compte" color="yellow" />
+  <card uid="swKSqM" id="36" role="ListItem" parentCardId="5" otherParentCardId="33" index="0" title="Modifier Client" color="green" />
+  <card uid="w3kp5g" id="37" role="ListItem" parentCardId="20" otherParentCardId="33" index="0" title="Placement boursier " color="green" />
+  <card uid="rEOfeb" id="38" role="ListItem" parentCardId="20" otherParentCardId="43" index="0" title="Simulation Crédit" color="yellow" />
+  <card uid="BAJedC" id="39" role="GroupHeader" index="2" title="Fonctionnalité Gérant" />
+  <card uid="MYUu49" id="40" role="ListHeader" parentCardId="39" index="0" title="Audit" />
+  <card uid="8en3Ef" id="42" role="ListItem" parentCardId="40" otherParentCardId="43" index="0" title="Audit des Comptes de l'agence" color="yellow" />
+  <card uid="m2qapS" id="43" role="LayerHeader" index="2" title="Release 3" />
+</map>
