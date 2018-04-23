@@ -9,6 +9,6 @@
 <body>
 
 <!-- Tag de redirection vers les pages xhtml de l'application. -->
-<jsp:forward page="/faces/Connexion.xhtml"></jsp:forward>
+<jsp:forward page="Connexion.xhtml"></jsp:forward>
 </body>
 </html>
