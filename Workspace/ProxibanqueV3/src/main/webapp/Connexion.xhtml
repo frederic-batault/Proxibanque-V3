@@ -12,15 +12,16 @@
 </h:head>
 <f:view>
 	<h:body>
+
 		<div class="ui-g">
 			<div class="ui-g-6 ui-md-4 ui-lg-1">
-				<img src="IMAGES/logoBanque.SVG" alt="logo banque" />
+				<img src="IMAGES/logoBanque.svg" alt="logo banque" width="100px" />
 			</div>
 			<div class="ui-g-12 ui-md-4 ui-lg-10">
 				<h1>Connexion</h1>
 			</div>
 			<div class="ui-g-6 ui-md-4 ui-lg-1">
-				<img src="IMAGES/logoSI.SVG" alt="logo SI" />
+				<img src="IMAGES/logoSI.svg" alt="logo SI" width="100px" />
 			</div>
 		</div>
 		<div class="ui-g">
@@ -31,7 +32,7 @@
 						<p:inputText id="login" value="#{loginBean.login}" />
 						<h:outputText value="Mot de passe" />
 						<p:password id="motDePasse" value="#{loginBean.motDePasse}" />
-						<p:commandButton value="Entrer" update="display"
+						<p:commandButton value="Entrer" 
 							icon="ui-icon-check" action="#{loginBean.authentification}" />
 					</h:panelGrid>
 				</h:form>
