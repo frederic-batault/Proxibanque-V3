@@ -51,10 +51,10 @@ public class LoginBean implements Serializable {
 		// envoi à la bonne page en fonction du résultat
 		if (authentifie == true) {
 
-			return "conseiller";
+			return "Conseiller";
 
 		} else {
-			return "erreurConnexion";
+			return "ErreurConnexion";
 		}
 	}
 }

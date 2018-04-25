@@ -1,6 +1,7 @@
 package fr.gtm.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,64 +9,98 @@ import java.sql.Statement;
 import fr.gtm.domaine.*;
 
 /**
- * Classe d'acces aux données pour le conseiller
+ * Classe d'acces aux donnÃ©es pour le conseiller
  *
  */
 public class ConseillerDao {
-
-	private ConnectionDao conDao = new ConnectionDao();
-	private Connection con = conDao.connect();
-	private Statement st;
-	private ResultSet result;
-
-
-	public Conseiller getConseillerConseiller(Conseiller leConseiller) {
+	private Statement connect() {
 		try {
-			String sql = "SELECT  idconseiller,nom,prenom,login,password,nbClient FROM conseiller WHERE login = '"
-					+ leConseiller.getLogin() + "' and password = '" + leConseiller.getPassword() + "'";
-			this.st = this.con.createStatement();
-			this.result = this.st.executeQuery(sql); // Execution de la requete
-			result.next();
-			if (result.next()) {
-				leConseiller.setIdConseiller(result.getInt("idconseiller"));
-				leConseiller.setNom(result.getString("nom"));// Recuperation des donnees
-				leConseiller.setPrenom(result.getString("prenom"));
-				leConseiller.setLogin(result.getString("login"));
-				leConseiller.setPassword(result.getString("password"));
-				leConseiller.setNbClient(result.getInt("nbClient"));
-				}else {
-				leConseiller.setIdConseiller(0);
-			}
-			return leConseiller; // retour de la reponse
-		} catch (SQLException e) {
-			System.out.println("Probleme lors de la recuperation du client !");
+			// Chargement du driver (dans le pilote)
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// Connexion la base de donnee
+			String url = "jdbc:mysql://localhost:3306/proxibanquebddv3";
+			String login = "root";
+			String mdp = "root";
+			Connection connection = DriverManager.getConnection(url, login, mdp);
+
+			// Prï¿½paration de la requete
+			Statement stmt = connection.createStatement();
+			return stmt;
+		} catch (ClassNotFoundException e) {
+			System.out.println("Probleme chargement du driver !");
 			e.printStackTrace();
-			return leConseiller;
+			Statement stmt = null;
+			return stmt;
+		} catch (SQLException e) {
+			System.out.println("Probleme de connexion a la base de donnee !");
+			e.printStackTrace();
+			Statement stmt = null;
+			return stmt;
 		}
 	}
 
+	// private ConnectionDao conDao = new ConnectionDao();
+	// private Connection con = conDao.connect();
+	// private Statement st;
+	// private ResultSet result;
+	//
+	//
+	// public Conseiller getConseillerConseiller(Conseiller leConseiller) {
+	// try {
+	// String sql = "SELECT idconseiller,nom,prenom,login,password,nbClient FROM
+	// conseiller WHERE login = '"
+	// + leConseiller.getLogin() + "' and password = '" + leConseiller.getPassword()
+	// + "'";
+	// this.st = this.con.createStatement();
+	// this.result = this.st.executeQuery(sql); // Execution de la requete
+	// result.next();
+	// if (result.next()) {
+	// leConseiller.setIdConseiller(result.getInt("idconseiller"));
+	// leConseiller.setNom(result.getString("nom"));// Recuperation des donnees
+	// leConseiller.setPrenom(result.getString("prenom"));
+	// leConseiller.setLogin(result.getString("login"));
+	// leConseiller.setPassword(result.getString("password"));
+	// leConseiller.setNbClient(result.getInt("nbClient"));
+	// }else {
+	// leConseiller.setIdConseiller(0);
+	// }
+	// return leConseiller; // retour de la reponse
+	// } catch (SQLException e) {
+	// System.out.println("Probleme lors de la recuperation du client !");
+	// e.printStackTrace();
+	// return leConseiller;
+	// }
+	// }
+
 	/**
-	 * Methode permettant d'obtenir un objet conseiller à partir de son login. Les informations du conseiller sont tirees de la base de données
+	 * Methode permettant d'obtenir un objet conseiller Ã  partir de son login. Les
+	 * informations du conseiller sont tirees de la base de donnÃ©es
+	 * 
 	 * @param login
 	 * @return
 	 */
 	public Conseiller getConseiller(String login) {
 		try {
-			String sql = "SELECT  idconseiller,nom,prenom,login,password,nbClient FROM conseiller WHERE login = '"
+			Statement stmt = this.connect();
+			String sql = "SELECT  idconseiller,nom,prenom,login,password,nbClients FROM conseiller WHERE login = '"
 					+ login + "'";
-			this.st = this.con.createStatement();
-			this.result = this.st.executeQuery(sql); // Execution de la requete
-			// result.next();
+
+			// this.st = this.con.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			// Execution de la requete
+			result.next();
 			Conseiller leConseiller = new Conseiller();
-				leConseiller.setIdConseiller(result.getInt("idconseiller"));
-				leConseiller.setNom(result.getString("nom"));// Recuperation des donnees
-				leConseiller.setPrenom(result.getString("prenom"));
-				leConseiller.setNbClient(result.getInt("nbClient"));
-		
-		
+			leConseiller.setIdConseiller(result.getInt("idconseiller"));
+			leConseiller.setNom(result.getString("nom"));// Recuperation des donnees
+			leConseiller.setPrenom(result.getString("prenom"));
+			leConseiller.setLogin(result.getString("login"));
+			leConseiller.setPassword(result.getString("password"));
+			leConseiller.setNbClient(result.getInt("nbClients"));
+
 			return leConseiller; // retour de la reponse
 		} catch (SQLException e) {
-			System.out.println("Probleme lors de la recuperation du client !");
+			System.out.println("Probleme lors de la recuperation du conseiller !");
 			e.printStackTrace();
 			return null;
 		}
