@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 
 import fr.gtm.service.ConseillerService;
 
-@ManagedBean(name = "loginBean")
+@ManagedBean(name = "loginbean")
 public class LoginBean implements Serializable {
 
 	// propriétés

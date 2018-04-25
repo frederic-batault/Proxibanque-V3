@@ -7,30 +7,39 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <f:view>
-	<head>
-<link rel="stylesheet" href="css/css.css"></link>
-	</head>
+	<h:head>
+		<link rel="stylesheet" href="css/css.css"></link>
+	</h:head>
 	<h:body>
 		<div class="ui-g">
 			<div class="ui-g-6 ui-md-4 ui-lg-1">
-				<img src="images/logoBanque.SVG" alt="logo banque" />
+				<img src="images/logoBanque.svg" alt="logo banque" />
 			</div>
 			<div class="ui-g-12 ui-md-4 ui-lg-10">
-				<h1>Erreur : </h1>
+				<h1>Conseiller</h1>
 			</div>
 			<div class="ui-g-6 ui-md-4 ui-lg-1">
-				<img src="images/logoSI.SVG" alt="logo SI" />
+				<img src="images/logoSI.svg" alt="logo SI" />
 			</div>
 		</div>
 		<div class="ui-g">
 			<div class="ui-g-12 ui-md-12 ui-lg-12">
-				mauvais identifiant / mot de passe
+				<h:form>
+					<p:commandButton value="Afficher la liste des clients"
+						icon="ui-icon-check" action="#{conseillerBean.init}" />
+				</h:form>
+				<p:dataList value="#{conseillerBean.listeClients}"
+					var="clientDomaine" type="ordered">
+					<f:facet name="header">Liste de vos clients</f:facet>
+        #{clientDomaine.prenom}, #{clientDomaine.nom}, #{clientDomaine.email}, #{clientDomaine.adresse}, #{clientDomaine.codePostal}, #{clientDomaine.ville}
+    </p:dataList>
+
 			</div>
 		</div>
 		<div class="ui-g">
 			<div class="ui-g-12 ui-md-12 ui-lg-12">
 				<p>
-					Créé par<img src="images/GTM.png" alt="logo SI" width="80px" />
+					Créé par <img src="images/GTM.png" alt="logo SI" width="80px" />
 				</p>
 			</div>
 		</div>

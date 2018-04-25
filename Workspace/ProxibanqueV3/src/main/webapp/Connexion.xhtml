@@ -29,11 +29,11 @@
 				<h:form>
 					<h:panelGrid columns="2" cellpadding="5">
 						<h:outputText value="Identifiant" />
-						<p:inputText id="login" value="#{loginBean.login}" />
+						<p:inputText id="login" value="#{loginbean.login}" />
 						<h:outputText value="Mot de passe" />
-						<p:password id="motDePasse" value="#{loginBean.motDePasse}" />
+						<p:password id="motDePasse" value="#{loginbean.motDePasse}" />
 						<p:commandButton value="Entrer" 
-							icon="ui-icon-check" action="#{loginBean.authentification}" />
+							icon="ui-icon-check" action="#{loginbean.authentification}" />
 					</h:panelGrid>
 				</h:form>
 			</div>
