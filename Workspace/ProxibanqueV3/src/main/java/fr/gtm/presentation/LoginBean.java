@@ -1,10 +1,10 @@
-package presentation;
+package fr.gtm.presentation;
 
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 
-import service.ConseillerService;
+import fr.gtm.service.ConseillerService;
 
 @ManagedBean(name = "loginBean")
 public class LoginBean implements Serializable {
