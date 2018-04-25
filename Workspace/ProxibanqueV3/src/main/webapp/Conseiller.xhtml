@@ -16,7 +16,7 @@
 				<img src="images/logoBanque.svg" alt="logo banque" />
 			</div>
 			<div class="ui-g-12 ui-md-4 ui-lg-10">
-				<h1>Conseiller</h1>
+				<h1>Espace conseiller</h1>
 			</div>
 			<div class="ui-g-6 ui-md-4 ui-lg-1">
 				<img src="images/logoSI.svg" alt="logo SI" />
@@ -26,14 +26,29 @@
 			<div class="ui-g-12 ui-md-12 ui-lg-12">
 				<h:form>
 					<p:commandButton value="Afficher la liste des clients"
-						icon="ui-icon-check" action="#{conseillerBean.init}" />
-				</h:form>
-				<p:dataList value="#{conseillerBean.listeClients}"
-					var="clientDomaine" type="ordered">
-					<f:facet name="header">Liste de vos clients</f:facet>
-        #{clientDomaine.prenom}, #{clientDomaine.nom}, #{clientDomaine.email}, #{clientDomaine.adresse}, #{clientDomaine.codePostal}, #{clientDomaine.ville}
-    </p:dataList>
+						icon="ui-icon-check" action="#{loginBean.lister}" />
 
+					<p:dataTable var="clientDomaine" value="#{loginBean.listeClients}">
+						<p:column headerText="prénom">
+							<h:outputText value="#{clientDomaine.prenom}" />
+						</p:column>
+						<p:column headerText="nom">
+							<h:outputText value="#{clientDomaine.nom}" />
+						</p:column>
+						<p:column headerText="email">
+							<h:outputText value="#{clientDomaine.email}" />
+						</p:column>
+						<p:column headerText="adresse">
+							<h:outputText value="#{clientDomaine.adresse}" />
+						</p:column>
+						<p:column headerText="code postal">
+							<h:outputText value="#{clientDomaine.codePostal}" />
+						</p:column>
+						<p:column headerText="ville">
+							<h:outputText value="#{clientDomaine.ville}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
 			</div>
 		</div>
 		<div class="ui-g">
