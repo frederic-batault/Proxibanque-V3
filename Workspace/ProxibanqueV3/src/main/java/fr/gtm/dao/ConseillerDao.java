@@ -1,49 +1,48 @@
 package fr.gtm.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import fr.gtm.domaine.*;
 
 /**
- * Classe d'acces aux données pour le conseiller
+ * Classe d'acces aux donnees pour le conseiller
  *
  */
 public class ConseillerDao {
-	private Statement connect() {
-		try {
-			// Chargement du driver (dans le pilote)
-			Class.forName("com.mysql.jdbc.Driver");
+	
+	// private Statement connect() {
+	// try {
+	// // Chargement du driver (dans le pilote)
+	// Class.forName("com.mysql.jdbc.Driver");
+	//
+	// // Connexion la base de donnee
+	// String url = "jdbc:mysql://localhost:3306/proxibanquebddv3";
+	// String login = "root";
+	// String mdp = "root";
+	// Connection connection = DriverManager.getConnection(url, login, mdp);
+	//
+	// // Pr�paration de la requete
+	// Statement stmt = connection.createStatement();
+	// return stmt;
+	// } catch (ClassNotFoundException e) {
+	// System.out.println("Probleme chargement du driver !");
+	// e.printStackTrace();
+	// Statement stmt = null;
+	// return stmt;
+	// } catch (SQLException e) {
+	// System.out.println("Probleme de connexion a la base de donnee !");
+	// e.printStackTrace();
+	// Statement stmt = null;
+	// return stmt;
+	// }
+	// }
 
-			// Connexion la base de donnee
-			String url = "jdbc:mysql://localhost:3306/proxibanquebddv3";
-			String login = "root";
-			String mdp = "root";
-			Connection connection = DriverManager.getConnection(url, login, mdp);
+	private ConnectionDao conDao = new ConnectionDao();
+	private Connection con = conDao.connect();
 
-			// Pr�paration de la requete
-			Statement stmt = connection.createStatement();
-			return stmt;
-		} catch (ClassNotFoundException e) {
-			System.out.println("Probleme chargement du driver !");
-			e.printStackTrace();
-			Statement stmt = null;
-			return stmt;
-		} catch (SQLException e) {
-			System.out.println("Probleme de connexion a la base de donnee !");
-			e.printStackTrace();
-			Statement stmt = null;
-			return stmt;
-		}
-	}
-
-	// private ConnectionDao conDao = new ConnectionDao();
-	// private Connection con = conDao.connect();
-	// private Statement st;
-	// private ResultSet result;
 	//
 	//
 	// public Conseiller getConseillerConseiller(Conseiller leConseiller) {
@@ -74,20 +73,25 @@ public class ConseillerDao {
 	// }
 
 	/**
-	 * Methode permettant d'obtenir un objet conseiller à partir de son login. Les
-	 * informations du conseiller sont tirees de la base de données
+	 * Methode permettant d'obtenir un objet conseiller a partir de son login. Les
+	 * informations du conseiller sont tirees de la base de donnees
 	 * 
-	 * @param login
-	 * @return
+	 * @param login du conseiller dont on souhaite les autres informations
+	 * @return objet conseiller
 	 */
 	public Conseiller getConseiller(String login) {
 		try {
-			Statement stmt = this.connect();
-			String sql = "SELECT  idconseiller,nom,prenom,login,password,nbClients FROM conseiller WHERE login = '"
-					+ login + "'";
+			PreparedStatement stmt = this.con.prepareStatement(
+					"SELECT  idconseiller,nom,prenom,login,password,nbClients FROM conseiller WHERE login = ? ");
+			stmt.setString(1, login);
 
-			// this.st = this.con.createStatement();
-			ResultSet result = stmt.executeQuery(sql);
+			// Statement stmt = this.connect();
+			// String sql = "SELECT idconseiller,nom,prenom,login,password,nbClients FROM
+			// conseiller WHERE login = '"
+			// + login + "'";
+
+			// this.stmt = this.con.createStatement();
+			ResultSet result = stmt.executeQuery();
 			// Execution de la requete
 			result.next();
 			Conseiller leConseiller = new Conseiller();

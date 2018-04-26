@@ -2,7 +2,7 @@ package fr.gtm.domaine;
 
 /**
  * Classe CompteCourant heritee de la classe Compte
- * @author user
+ * 
  *
  */
 public class CompteCourant extends Compte {

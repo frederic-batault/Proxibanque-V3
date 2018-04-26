@@ -8,27 +8,34 @@
 
 <f:view>
 	<h:head>
-		<link rel="stylesheet" href="css/css.css"></link>
+		<link rel="stylesheet" href="CSS/css.css"></link>
 	</h:head>
 	<h:body>
 		<div class="ui-g">
 			<div class="ui-g-6 ui-md-4 ui-lg-1">
-				<img src="images/logoBanque.svg" alt="logo banque" />
+				<img src="IMAGES/logoBanque.svg" alt="logo banque" />
 			</div>
 			<div class="ui-g-12 ui-md-4 ui-lg-10">
-				<h1>Espace conseiller</h1>
+				<h1>
+					Espace conseiller de
+					<h:outputText value="#{loginBean.prenom}" />
+					<h:outputText value=" " />
+					<h:outputText value="#{loginBean.nom}" />
+				</h1>
 			</div>
 			<div class="ui-g-6 ui-md-4 ui-lg-1">
-				<img src="images/logoSI.svg" alt="logo SI" />
+				<img src="IMAGES/logoSI.svg" alt="logo SI" />
 			</div>
 		</div>
 		<div class="ui-g">
 			<div class="ui-g-12 ui-md-12 ui-lg-12">
 				<h:form>
-					<p:commandButton value="Afficher la liste des clients"
-						icon="ui-icon-check" action="#{loginBean.lister}" />
-
+					<p:commandButton value=" " icon="ui-icon-check" />
+					<h2>Liste de vos clients :</h2>
 					<p:dataTable var="clientDomaine" value="#{loginBean.listeClients}">
+						<p:column headerText="n° identifiant">
+							<h:outputText value="#{clientDomaine.idClient}" />
+						</p:column>
 						<p:column headerText="prénom">
 							<h:outputText value="#{clientDomaine.prenom}" />
 						</p:column>
@@ -50,11 +57,22 @@
 					</p:dataTable>
 				</h:form>
 			</div>
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<h:form>
+
+					<h:outputText value="Modifier le client n°" />
+					<p:inputText id="modif" value="#{loginBean.client}" />
+					<p:commandButton  value="Modifier" icon="ui-icon-check"
+						action="#{redirectionModifBean.rediriger}">
+						<f:param name="modif" value="#{clientDomaine.id}" />
+					</p:commandButton>
+				</h:form>
+			</div>
 		</div>
 		<div class="ui-g">
 			<div class="ui-g-12 ui-md-12 ui-lg-12">
 				<p>
-					Créé par <img src="images/GTM.png" alt="logo SI" width="80px" />
+					Créé par <img src="IMAGES/GTM.png" alt="logo SI" width="80px" />
 				</p>
 			</div>
 		</div>

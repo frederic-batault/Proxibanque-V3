@@ -3,7 +3,7 @@ package fr.gtm.domaine;
 /**
  *
  * 
- * @author Stagiaire
+ * Classe métier contenant les proprietes d'un client
  *
  */
 public class ClientDomaine {
@@ -44,6 +44,20 @@ public class ClientDomaine {
 			String ville, int idConseiller) {
 		super();
 		this.idClient = idClient;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.idConseiller = idConseiller;
+	}
+	
+	
+
+	public ClientDomaine(String nom, String prenom, String email, String adresse, String codePostal, String ville,
+			int idConseiller) {
+		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;

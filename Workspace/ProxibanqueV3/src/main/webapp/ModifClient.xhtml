@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view>
+	<h:head>
+		<link rel="stylesheet" href="CSS/css.css"></link>
+	</h:head>
+	<h:body>
+		<div class="ui-g">
+			<div class="ui-g-6 ui-md-4 ui-lg-1">
+				<img src="IMAGES/logoBanque.svg" alt="logo banque" />
+			</div>
+			<div class="ui-g-12 ui-md-4 ui-lg-10">
+				<h1>
+					Espace conseiller de
+					<h:outputText value="#{loginBean.prenom}" />
+					<h:outputText value=" " />
+					<h:outputText value="#{loginBean.nom}" />
+				</h1>
+			</div>
+			<div class="ui-g-6 ui-md-4 ui-lg-1">
+				<img src="IMAGES/logoSI.svg" alt="logo SI" />
+			</div>
+		</div>
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+			<h2> Ajouter un client </h2>
+			<p:commandButton value="afficher les anciennes valeurs" icon="ui-icon-check"
+							action="#{loginBean.afficherAncien}" />
+				<h:form>
+					
+					<h:panelGrid columns="3" cellpadding="5">
+						<h:outputText value="nom" />
+						<p:inputText id="nom" value="#{loginBean.nomClient}" />
+						<h:outputText value="{loginBean.ancienNom}" />
+						<h:outputText value="prénom" />
+						<p:inputText id="prenom" value="#{loginBean.prenomClient}" />
+						<h:outputText value="{loginBean.ancienPrenom}" />
+						<h:outputText value="e-mail" />
+						<p:inputText id="email" value="#{loginBean.email}" />
+						<h:outputText value="{loginBean.ancienEmail}" />
+						<h:outputText value="adresse" />
+						<p:inputText id="adresse" value="#{loginBean.adresse}" />
+						<h:outputText value="{loginBean.ancienAdresse}" />
+						<h:outputText value="codePostal" />
+						<p:inputText id="codePostal" value="#{loginBean.codePostal}" />
+						<h:outputText value="loginBean.ancienCodePostal}" />
+						<h:outputText value="ville" />
+						<p:inputText id="ville" value="#{loginBean.ville}" />
+						<h:outputText value="{loginBean.ancienVille}" />
+						<p:commandButton value="Modifier" icon="ui-icon-check"
+							action="#loginBean.modifier}" />
+					</h:panelGrid>
+				</h:form>
+				
+			</div>
+		</div>
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<p>
+					Créé par <img src="IMAGES/GTM.png" alt="logo SI" width="80px" />
+				</p>
+			</div>
+		</div>
+	</h:body>
+</f:view>
+</html>

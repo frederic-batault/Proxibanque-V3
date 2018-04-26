@@ -3,7 +3,7 @@ package fr.gtm.domaine;
 import java.util.ArrayList;
 
 /**
- * @author user
+ * 
  *
  */
 public class Conseiller {

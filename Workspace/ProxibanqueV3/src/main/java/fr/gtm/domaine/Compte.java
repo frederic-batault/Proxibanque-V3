@@ -4,7 +4,7 @@ package fr.gtm.domaine;
  * Classe abstraite Compte, dont sont heritees les classes CompteCourant et
  * CompteEpargne
  * 
- * @author user
+ * 
  *
  */
 public abstract class Compte {

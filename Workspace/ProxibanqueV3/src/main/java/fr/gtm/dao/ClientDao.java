@@ -1,50 +1,50 @@
 package fr.gtm.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
+import java.sql.PreparedStatement;
 
 import fr.gtm.domaine.*;
 
 /**
- * Classe ClientDao
- * 
- * @author user
- *
+ * Classe qui gère la communication avec la base de donnéee concernant les propriétés d'un client
  */
 public class ClientDao {
 
 	private ConnectionDao conDao = new ConnectionDao();
 	private Connection con = conDao.connect();
-	
-	
 
 	/**
 	 * methode qui nous permet de creer un nouveau client
 	 * 
-	 * @param leClient
-	 * @return
+	 * @param leClient objet client
+	 * @return booleen indiquant le succès ou l'échec de la création
 	 */
 	public boolean createClient(ClientDomaine leClient) {
 		boolean reponse = false; // Creation de la variable de sortie
 		try {
-			Statement stmt = this.con.createStatement(); // Connexion et preparation de la requete
-			
-			String sql = "INSERT INTO `client`(`nom`, `prenom`, `email`, `adresse`,`codePostal`,`ville`,idConseiller) VALUES ('"
-					+ leClient.getNom() + "', '" + leClient.getPrenom() + "', '" + leClient.getEmail() + "', '"
-					+ leClient.getAdresse() + "', '" + leClient.getCodePostal() + "', '" + leClient.getVille() + "',"+leClient.getIdConseiller()+");";
-			
-			int result = stmt.executeUpdate(sql); // Execution de la requete
+			PreparedStatement stmt = this.con.prepareStatement(
+					"INSERT INTO `client`(`nom`, `prenom`, `email`, `adresse`,`codePostal`,`ville`,idConseiller) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+			stmt.setString(1, leClient.getNom());
+			stmt.setString(2, leClient.getPrenom());
+			stmt.setString(3, leClient.getEmail());
+			stmt.setString(4, leClient.getAdresse());
+			stmt.setString(5, leClient.getCodePostal());
+			stmt.setString(5, leClient.getVille());
+			stmt.setString(6, leClient.getEmail());
+			stmt.setInt(7, leClient.getIdConseiller());
+
+			int result = stmt.executeUpdate(); // Execution de la requete
 			if (result > 0) { // Lecture des esultats
 				reponse = true;
 			} else {
 				reponse = false;
 			}
-			return reponse; // retour de la rï¿½ponse
+			return reponse; // retour de la reponse
 		} catch (SQLException e) {
 			System.out.println("Probleme lors de la creation du client !");
 			e.printStackTrace();
@@ -54,15 +54,15 @@ public class ClientDao {
 
 	/**
 	 * methode qui nous permet d'afficher un client
+	 * 
 	 * @param leClient
 	 * @return
 	 */
 	public ClientDomaine getClient(ClientDomaine leClient) {
 		try {
-			Statement stmt = this.con.createStatement(); // Connexion et preparation de la requete
-			String sql = "SELECT  * FROM `client` WHERE idClient = "
-					+ leClient.getIdClient();
-			ResultSet result = stmt.executeQuery(sql); // Exï¿½cution de la requete
+			PreparedStatement stmt = this.con.prepareStatement("SELECT  * FROM `client` WHERE idClient = ?");
+			stmt.setInt(1, leClient.getIdClient());
+			ResultSet result = stmt.executeQuery(); // Execution de la requete
 			result.next();
 			leClient.setNom(result.getString("nom"));
 			leClient.setPrenom(result.getString("prenom"));
@@ -73,24 +73,27 @@ public class ClientDao {
 			leClient.setIdConseiller(result.getInt("idConseiller"));
 			return leClient; // retour de la reponse
 		} catch (SQLException e) {
-			System.out.println("Problï¿½me lors de la rï¿½cupï¿½ration du client !");
+			System.out.println("Probleme lors de la recuperation du client !");
 			e.printStackTrace();
 			return leClient;
 		}
 	}
 
 	/**
-	 *  methode qui nous permet de mettre Ã  jour client
-	 * @param leClient
-	 * @return
+	 * methode qui nous permet de mettre a  jour client
+	 * 
+	 * @param leClient objet client contenant les nouvelles informations sur le client
+	 * @return objet client modifié
 	 */
-	public ClientDomaine updateClient(ClientDomaine leClient) {
+	public ClientDomaine updateClient(int idClient) {
 		try {
-			Statement stmt = this.con.createStatement(); // Connexion et preparation de la requete
+			ClientDomaine leClient=new ClientDomaine();
 			String sql = "UPDATE `client` SET `nom` = '" + leClient.getNom() + "', `prenom` = '" + leClient.getPrenom()
 					+ "', `email` = '" + leClient.getEmail() + "', `adresse` = '" + leClient.getAdresse()
 					+ "', `codePostal` = '" + leClient.getCodePostal() + "', `ville` = '" + leClient.getVille()
-					+ "' WHERE `idClient` = "+ leClient.getIdClient();
+					+ "' WHERE `idClient` = " + idClient;
+			PreparedStatement stmt = this.con.prepareStatement(sql); // Connexion et preparation de la requete
+
 			int result = stmt.executeUpdate(sql); // Execution de la requete
 			if (result > 0) {
 				return leClient; // retour de la reponse
@@ -99,23 +102,24 @@ public class ClientDao {
 				return leClient;// retour de la reponse
 			}
 		} catch (SQLException e) {
-			System.out.println("Problï¿½me lors de la modification du client !");
+			System.out.println("Probleme lors de la modification du client !");
 			e.printStackTrace();
-			return leClient;// retour de la reponse
+			return null;// retour de la reponse
 		}
 	}
 
 	/**
-	 *  methode qui nous permet de supprimer un client
-	 * @param monClient
-	 * @return
+	 * methode qui nous permet de supprimer un client
+	 * 
+	 * @param monClient objet client qui correspond au client à supprimer de la base
+	 * @return booleen indiquant le succès ou l'échec de la suppression
 	 */
 	public boolean deleteClient(ClientDomaine monClient) {
 		boolean reponse = false; // Creation variable de retour
 		try {
-			Statement stmt = this.con.createStatement(); // Connexion et preparation de la requete
-			String sql = "DELETE FROM client WHERE `idClient` = " + monClient.getIdClient();
 
+			String sql = "DELETE FROM client WHERE `idClient` = " + monClient.getIdClient();
+			PreparedStatement stmt = this.con.prepareStatement(sql); // Connexion et preparation de la requete
 			int result = stmt.executeUpdate(sql); // Exï¿½cution de la requï¿½te
 			if (result > 0) { // Lecture des rï¿½sultats
 				reponse = true;
@@ -129,15 +133,17 @@ public class ClientDao {
 	}
 
 	/**
-	 *  methode qui nous permet d'afficher toute la liste des clients
-	 * @param c
-	 * @return
+	 * methode qui nous permet d'afficher la liste des clients affilies à un conseiller donne
+	 * 
+	 * @param c objet conseiller correspondant au conseiller pour lequel on souhaite la liste des clients affilies
+	 * @return liste d'objets de type ClientDomaine
 	 */
 	public ArrayList<ClientDomaine> getAllClient(Conseiller c) {
 		ArrayList<ClientDomaine> listClients = new ArrayList<ClientDomaine>();
 		try {
-			Statement stmt = this.con.createStatement(); // Connexion et preparation de la requete
-			String sql = "SELECT * FROM `client` where idconseiller = "+c.getIdConseiller();
+
+			String sql = "SELECT * FROM `client` where idconseiller = " + c.getIdConseiller();
+			PreparedStatement stmt = this.con.prepareStatement(sql); // Connexion et preparation de la requete
 			ResultSet result = stmt.executeQuery(sql); // Execution de la requete
 			while (result.next()) {
 				ClientDomaine leClient = new ClientDomaine(); // Creation de la variable de sortie
@@ -158,5 +164,5 @@ public class ClientDao {
 			return listClients;// retour de la reponse
 		}
 	}
-	
+
 }

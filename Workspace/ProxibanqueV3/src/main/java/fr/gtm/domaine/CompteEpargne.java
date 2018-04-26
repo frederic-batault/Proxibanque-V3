@@ -3,7 +3,7 @@ package fr.gtm.domaine;
 /**
  * Classe CompteEpargne heritee de la classe Compte
  * 
- * @author Stagiaire
+ *
  *
  */
 public class CompteEpargne extends Compte {

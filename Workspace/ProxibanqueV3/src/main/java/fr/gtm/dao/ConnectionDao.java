@@ -6,11 +6,14 @@ import java.sql.SQLException;
 
 /**
  * classe connection a la bdd
- * @author user
+ * 
  *
  */
 public class ConnectionDao {
 	
+	/**
+	 * @return objet de type connection utilise par les autres methodes de la couche DAO
+	 */
 	public Connection connect() {
 		try {
 			// Chargement du driver (dans le pilote)
