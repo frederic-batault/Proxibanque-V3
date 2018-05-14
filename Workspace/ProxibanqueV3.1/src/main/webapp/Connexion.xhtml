@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+	<link rel="stylesheet" href="CSS/css.css"></link>
+</h:head>
+<f:view>
+	<h:body>
+
+		<div class="ui-g">
+			<div class="ui-g-6 ui-md-4 ui-lg-1">
+				<img src="IMAGES/logoBanque.svg" alt="logo banque" width="100px" />
+			</div>
+			<div class="ui-g-12 ui-md-4 ui-lg-10">
+				<h1>Connexion</h1>
+			</div>
+			<div class="ui-g-6 ui-md-4 ui-lg-1">
+				<img src="IMAGES/logoSI.svg" alt="logo SI" width="100px" />
+			</div>
+		</div>
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Identifiant" />
+						<p:inputText id="login" value="#{loginBean.refConseiller.login}" />
+						<h:outputText value="Mot de passe" />
+						<p:password id="motDePasse" value="#{loginBean.refConseiller.password}" />
+						<p:commandButton value="Entrer" 
+							icon="ui-icon-check" action="#{loginBean.authentification}" />
+					</h:panelGrid>
+				</h:form>
+			</div>
+		</div>
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<p>
+					Créé par<img src="IMAGES/GTM.png" alt="logo SI" width="80px" />
+				</p>
+			</div>
+		</div>
+	</h:body>
+</f:view>
+</html>

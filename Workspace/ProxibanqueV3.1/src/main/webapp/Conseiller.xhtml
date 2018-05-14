@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view>
+	<h:head>
+		<link rel="stylesheet" href="CSS/css.css"></link>
+	</h:head>
+	<h:body>
+		<div class="ui-g">
+			<div class="ui-g-6 ui-md-4 ui-lg-1">
+				<img src="IMAGES/logoBanque.svg" alt="logo banque" />
+			</div>
+			<div class="ui-g-12 ui-md-4 ui-lg-10">
+				<h1>
+					Espace conseiller de
+					<h:outputText value="#{loginBean.refConseiller.prenom}" />
+					<h:outputText value=" " />
+					<h:outputText value="#{loginBean.refConseiller.nom}" />
+				</h1>
+			</div>
+			<div class="ui-g-6 ui-md-4 ui-lg-1">
+				<img src="IMAGES/logoSI.svg" alt="logo SI" />
+			</div>
+		</div>
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<h:form>
+					<p:commandButton value=" " icon="ui-icon-check" />
+					<h2>Liste de vos clients :</h2>
+					<p:dataTable var="clientDomaine" value="#{loginBean.refConseiller.listeClients}">
+						<p:column headerText="n° identifiant">
+							<h:outputText value="#{clientDomaine.idClient}" />
+						</p:column>
+						<p:column headerText="prénom">
+							<h:outputText value="#{clientDomaine.prenom}" />
+						</p:column>
+						<p:column headerText="nom">
+							<h:outputText value="#{clientDomaine.nom}" />
+						</p:column>
+						<p:column headerText="email">
+							<h:outputText value="#{clientDomaine.email}" />
+						</p:column>
+						<p:column headerText="adresse">
+							<h:outputText value="#{clientDomaine.adresse}" />
+						</p:column>
+						<p:column headerText="code postal">
+							<h:outputText value="#{clientDomaine.codePostal}" />
+						</p:column>
+						<p:column headerText="ville">
+							<h:outputText value="#{clientDomaine.ville}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</div>
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<h:form>
+
+					<h:outputText value="Modifier le client n°" />
+					<p:inputText id="modif" value="#{loginBean.numClient}" />
+					<p:commandButton  value="Modifier" icon="ui-icon-check"
+						action="#{redirectionModifBean.rediriger}">
+						<f:param name="modif" value="#{loginBean.refClient.idClient}" />
+					</p:commandButton>
+				</h:form>
+			</div>
+		</div>
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-12 ui-lg-12">
+				<p>
+					Créé par <img src="IMAGES/GTM.png" alt="logo SI" width="80px" />
+				</p>
+			</div>
+		</div>
+	</h:body>
+</f:view>
+</html>
